@@ -6,7 +6,7 @@ from git import Repo
 repo = Repo(os.getcwd())
 
 if len(repo.untracked_files) != 0:
-    print("NEW FILES ARE NOT ALLOW!!!")
+    print("NEW FILES ARE NOT ALLOWED!!!")
     print("These are new files you added: ")
     for file in repo.untracked_files:
         print(f"- {file}")
@@ -26,6 +26,7 @@ ALLOW_CHANGED = [
     "backend/nginx/app.conf",
     "backend/docker-compose.yml",
     "backend/app/settings_prod.py",
+    "report.pdf"
 ]
 
 extras = []
