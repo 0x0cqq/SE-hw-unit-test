@@ -1,1 +1,48 @@
-# TODO: 补充docker compose配置文件
+# 编写合适的 Dockerfile 以及 docker-compose 配置（必要时你需要调整清软论坛的代码）来实现：
+# 清软论坛以 MySQL 为数据库、通过 nginx 以 8000 端口向外提供服务；
+# 通过你的服务器 ip:8000 可以访问到论坛前端并正常进行各项操作；
+# 通过你的服务器 ip:8000/api/v1 可以直接访问后端的各项 API
+
+version: '3.7'
+
+services:
+  backend:
+    container_name: app
+    build: .
+    # image: backend
+    depends_on:
+      - mysql
+    networks:
+      - inner
+      - front
+  
+  mysql:
+    container_name: mysql
+    image: mysql:8.1
+    networks:
+      - inner
+    environment:
+      - MYSQL_ROOT_PASSWORD=2020012385
+      - MYSQL_DATABASE=thss
+      - TZ=Asia/Shanghai
+    volumes:
+      - ../mysql:/var/lib/mysql
+    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+  
+  nginx:
+    container_name: nginx
+    image: nginx:latest
+    depends_on:
+      - backend
+    volumes:
+      - ./nginx/app.conf:/etc/nginx/conf.d/default.conf
+      - ./build/:/opt/build/
+    ports:
+      - "8000:8000"
+    networks:
+      - front
+
+
+networks:
+  inner:
+  front:

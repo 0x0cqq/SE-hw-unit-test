@@ -2,14 +2,13 @@ from app.settings import *
 
 DEBUG = False
 
-# TODO: 修改数据库连接的密码和 IP 地址
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
         "NAME": "thss",
         "USER": "root",
-        "PASSWORD": "thss",
-        "HOST": "db",
+        "PASSWORD": "2020012385",
+        "HOST": "mysql",
         "PORT": "3306",
     }
 }

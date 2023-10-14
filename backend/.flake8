@@ -1,2 +1,15 @@
 [flake8]
-# TODO: 补充flake8配置文件
+# 忽略且仅忽略 .git，所有 __pycache__ 文件夹，所有 migrations 文件夹
+exclude = 
+    .git,
+    __pycache__,
+    migrations
+# 对 tests/test_e2e.py 忽略E501错误，对 tests/test_api.py 忽略E501错误，对 driver.py 忽略E501错误，对 app/settings.py 忽略E501错误，对 user/views.py 忽略E722错误，对 app/settings_prod.py 忽略F401和F403错误
+per-file-ignores =
+    tests/test_e2e.py: E501,
+    tests/test_api.py: E501,
+    driver.py: E501,
+    app/settings.py: E501,
+    user/views.py: E722,
+    app/settings_prod.py: F401,F403
+

@@ -100,7 +100,8 @@ class SeleniumTestCase(LiveServerTestCase):
         time.sleep(1)
         self.webclient.find_element_by_id("password").send_keys("test_thss")
         time.sleep(1)
-        self.webclient.find_element_by_xpath('//*[@id="root"]/div/div[3]/div/button').click()
+        self.webclient.find_element_by_xpath(
+            '//*[@id="root"]/div/div[3]/div/button').click()
         time.sleep(3)
 
         """
