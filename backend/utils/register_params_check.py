@@ -35,9 +35,9 @@ def register_params_check(content: dict):
     username = content["username"]
     if not isinstance(username, str) or len(username) < 5 or len(username) > 12:
         return "username", False
-    if not re.match(r"^[a-zA-Z]+[0-9]+$", username): 
+    if not re.match(r"^[a-zA-Z]+[0-9]+$", username):
         return "username", False
-    
+
     # 用户密码为长度 8-15 的字符串，由大写、小写字母、数字和标点符号组成且必须包含这四种类型，有效的标点符号为-_*^
     if "password" not in content:
         return "password", False
@@ -46,7 +46,7 @@ def register_params_check(content: dict):
         return "password", False
     if not re.match(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[-_*^])[a-zA-Z\d\-_*^]+$", password):
         return "password", False
-    
+
     # 用户的手机号的格式为+[区号].[手机号]，其中区号必须为两位数字，手机号必须为 12 位数字，例如+12.123456789012
     if "mobile" not in content:
         return "mobile", False
@@ -55,14 +55,14 @@ def register_params_check(content: dict):
         return "mobile", False
     if not re.match(r"^\+\d{2}\.\d{12}$", mobile):
         return "mobile", False
-    
+
     # 昵称必须存在
     if "nickname" not in content:
         return "nickname", False
     nickname = content["nickname"]
     if not isinstance(nickname, str):
         return "nickname", False
-    
+
     # 用户的个人地址链接包含协议和域名两部分
     if "url" not in content:
         return "url", False
@@ -73,7 +73,8 @@ def register_params_check(content: dict):
     if not re.match(r"^https?://", url):
         return "url", False
     # 提取域名部分
-    domain = re.match(r"^https?://(([a-zA-Z0-9\-]{1,48}\.)*[a-zA-Z0-9\-]{1,48})$", url).group(1)
+    domain = re.match(
+        r"^https?://(([a-zA-Z0-9\-]{1,48}\.)*[a-zA-Z0-9\-]{1,48})$", url).group(1)
     # 用 . 分割域名
     domain_list = domain.split(".")
     # 标签不能用 - 开头或结尾
@@ -83,7 +84,7 @@ def register_params_check(content: dict):
     # 最后一个标签不能为纯数字
     if domain_list[-1].isdigit():
         return "url", False
-    
+
     # magic_number为非负数 int 数值，可选参数（在设计测试用例时无需考虑最大值上界）
     if "magic_number" not in content:
         content["magic_number"] = 0

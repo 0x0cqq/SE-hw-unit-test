@@ -2,7 +2,7 @@
 autopep8 --in-place --recursive .
 
 # 使用 autoflake 对代码自动格式化
-autoflake --in-place --recursive --remove-all-unused-imports --remove-unused-variables .
+autoflake --in-place --recursive --remove-unused-variables .
 
 # 使用 isort 对代码自动格式化
 isort .

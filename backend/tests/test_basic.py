@@ -30,7 +30,6 @@ class BasicTestCase(TestCase):
         result = register_params_check(content)
         self.assertEqual(result, ("username", False))
 
-    
     def test_username_invalid_layout(self):
         content = {
             "username": "123abc123",
@@ -88,7 +87,7 @@ class BasicTestCase(TestCase):
         }
         result = register_params_check(content)
         self.assertEqual(result, ("mobile", False))
-    
+
     def test_mobile_wrong_type(self):
         content = {
             "username": "abc12345",
@@ -123,7 +122,7 @@ class BasicTestCase(TestCase):
         }
         result = register_params_check(content)
         self.assertEqual(result, ("nickname", False))
-    
+
     def test_nickname_wrong_type(self):
         content = {
             "username": "abc12345",
@@ -146,7 +145,7 @@ class BasicTestCase(TestCase):
         }
         result = register_params_check(content)
         self.assertEqual(result, ("url", False))
-    
+
     def test_url_wrong_type(self):
         content = {
             "username": "abc12345",
@@ -194,7 +193,7 @@ class BasicTestCase(TestCase):
         }
         result = register_params_check(content)
         self.assertEqual(result, ("url", False))
-    
+
     def test_magic_number_invalid_type(self):
         content = {
             "username": "abc12345",
@@ -206,7 +205,7 @@ class BasicTestCase(TestCase):
         }
         result = register_params_check(content)
         self.assertEqual(result, ("magic_number", False))
-    
+
     def test_magic_number_missing(self):
         content = {
             "username": "abc12345",
