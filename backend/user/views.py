@@ -128,6 +128,6 @@ def register_user(request):
         else:
             return JsonResponse({"message": "Error"}, status=500)
     except json.JSONDecodeError:
-        return JsonResponse({"message": "bad arguments"}, status=400)
+        return JsonResponse({"message": "decode error bad arguments"}, status=400)
     except:
-        return JsonResponse({"message": "bad arguments"}, status=400)
+        return JsonResponse({"message": "other error bad arguments"}, status=400)

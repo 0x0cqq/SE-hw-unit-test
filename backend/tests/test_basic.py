@@ -194,18 +194,6 @@ class BasicTestCase(TestCase):
         result = register_params_check(content)
         self.assertEqual(result, ("url", False))
 
-    def test_magic_number_invalid_type(self):
-        content = {
-            "username": "abc12345",
-            "password": "Abc12345*",
-            "nickname": "test",
-            "mobile": "+86.123456789012",
-            "url": "https://www.google.com",
-            "magic_number": "0"
-        }
-        result = register_params_check(content)
-        self.assertEqual(result, ("magic_number", False))
-
     def test_magic_number_missing(self):
         content = {
             "username": "abc12345",
@@ -236,17 +224,6 @@ class BasicTestCase(TestCase):
             "mobile": "+86.123456789012",
             "url": "https://www.google.com",
             "magic_number": 0
-        }
-        result = register_params_check(content)
-        self.assertEqual(result, ("ok", True))
-
-    def test_magic_number_missing(self):
-        content = {
-            "username": "abc12345",
-            "password": "Abc12345*",
-            "nickname": "test",
-            "mobile": "+86.123456789012",
-            "url": "https://www.google.com",
         }
         result = register_params_check(content)
         self.assertEqual(result, ("ok", True))

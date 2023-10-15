@@ -96,14 +96,39 @@ flake8
 
 例如在这个例子中，我们想要测试没有用户名的情况下程序的输出，因此我们就构造了一个没有用户名的用例。
 
-测试样例列表：
+测试用例见下页：
 
-#table(
+
+#page(
+flipped: true,
+
+table(
     columns: (auto, auto, auto, auto, auto, auto, auto),
     [username], [password], [nickname], [mobile], [url], [magic_number], [备注],
-    [], [Abc12345\*], [test], [+86.123456789012], [https://www.google.com], [0]
+    [], [Abc12345\*], [test], [+86.123456789012], [https://www.google.com], [0], [没有用户名],
+    [a123], [Abc12345\*], [test], [+86.123456789012], [https://www.google.com], [0], [用户名过短],
+    [123abc123], [Abc12345\*], [test], [+86.123456789012], [https://www.google.com], [0], [用户名错误布局],
+    [abc12345], [], [test], [+86.123456789012], [https://www.google.com], [0], [密码缺失],
+    [abc12345], [Abc124\*], [test], [+86.123456789012], [https://www.google.com], [0], [密码太短],
+    [abc12345], [abc12345],  [test], [+86.123456789012], [https://www.google.com], [0], [密码太简单],
+    [abc12345], [Abc12345\*], [test], [], [https://www.google.com], [0], [手机缺失],
+    [abc12345], [Abc12345\*], [test], [123456789012], [https://www.google.com], [0], [手机类型错误],
+    [abc12345], [Abc12345\*], [test], [+86.12345678901], [https://www.google.com], [0], [手机格式错误],
+    [abc12345], [Abc12345\*], [], [+86.123456789012], [https://www.google.com], [0], [昵称缺失],
+    [abc12345], [Abc12345\*], [123], [+86.123456789012], [https://www.google.com], [0], [昵称错误的类型],
+    [abc12345], [Abc12345\*], [test], [+86.123456789012], [], [0], [URL缺失],
+    [abc12345], [Abc12345\*], [test], [+86.123456789012], [ftp:\/\/www.google.com], [0], [URL格式错误],
+    [abc12345], [Abc12345\*], [test], [+86.123456789012], [https://www.google.123], [0], [URL domain 错误],
+    [abc12345], [Abc12345\*], [test], [+86.123456789012], [https://www.google.-com], [0], [URL tag 错误],
+    [abc12345], [Abc12345\*], [test], [+86.123456789012], [https://www.google.com], [], [Magic Number缺失],
+    [abc12345], [Abc12345\*], [test], [+86.123456789012], [https://www.google.com], [-1], [Magic Number错误],
+    [abc12345], [Abc12345\*], [test], [+86.123456789012], [https://www.google.com], [0], [所有都符合],
 
 )
+
+)
+
+#pagebreak()
 
 
 === 覆盖率

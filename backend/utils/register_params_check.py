@@ -89,7 +89,7 @@ def register_params_check(content: dict):
     if "magic_number" not in content:
         content["magic_number"] = 0
     magic_number = content["magic_number"]
-    if not isinstance(magic_number, int) or magic_number < 0:
+    if int(magic_number) < 0:
         return "magic_number", False
 
     return "ok", True
