@@ -1,6 +1,9 @@
-#set heading(level: 1, numbering: "1.1.")
-
 = 作业1 - 报告
+
+
+#outline(indent: 1em)
+
+
 
 #set text(font: "Noto Serif CJK SC")
 
@@ -81,13 +84,8 @@ flake8
 
 === 测试函数
 
-针对每一个分支判断的判断的错误的输入，我们都编写了一个对应的测试函数，函数名就反映了测试的范围。
+总体上，针对每一个分支判断的判断的错误的输入，我们都编写了一个对应的测试函数，函数名就反映了测试的范围。
 
-总体样例：
-
-#align(center, 
-    image("image.png", width: 75%)
-)
 具体实现：
 
 #align(center, 
@@ -207,8 +205,9 @@ Dockerfile 包括如下内容：
 + 复制当前文件夹内所有的文件到 `/app/` 下
 + 暴露 `8000` 端口
 + 定义环境变量：`ENV DJANGO_SETTINGS_MODULE app.settings_prod` 采用部署设置
-+ 进行 migrate：`CMD python manage.py migrate --settings=app.settings_prod`
-+ 运行 `Gunicorn` 服务器：`CMD gunicorn -w4 -b 0.0.0.0:8000 --log-level=debug app.wsgi`
++ 先等待 20s `mysql` 服务器启动: `sleep 20`
++ 进行 migrate：`python manage.py migrate --settings=app.settings_prod`
++ 运行 `Gunicorn` 服务器：`gunicorn -w4 -b 0.0.0.0:8000 --log-level=debug app.wsgi`
 
 Docker Compose 中包括如下内容：
 
@@ -224,12 +223,14 @@ Mysql 服务器在 Docker Compose 中启动。
 
 + 使用 `mysql:8.1` 镜像
 + 容器名为 `mysql`
++ 暴露 3306 端口: `expose: 3306`
 + 配置环境变量如下:
     - `MYSQL_ROOT_PASSWORD=2020012385` 密码为学号
     - `MYSQL_DATABASE=thss` 数据库名为
     - `TZ=Asia/Shanghai` 时区为背景时间
 + 持久化存储，将 `/home/ubuntu/mysql` 目录映射到 `/var/lib/mysql` 下
 + 启动命令：`mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci`
+    - 这里需要允许使用 password 鉴权： `--default-authentication-plugin=mysql_native_password`
 + 使用 `inner` 网络，只有后端 Django 服务可以访问到
 
 
