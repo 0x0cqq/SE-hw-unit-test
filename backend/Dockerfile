@@ -19,9 +19,6 @@ COPY . /app
 
 EXPOSE 8000
 
-
 ENV DJANGO_SETTINGS_MODULE app.settings_prod
 
-CMD python manage.py migrate --settings=app.settings_prod
-
-CMD gunicorn -w4 -b 0.0.0.0:8000 --log-level=debug app.wsgi
+CMD sleep 10 && python manage.py migrate --settings=app.settings_prod && gunicorn -w4 -b 0.0.0.0:8000 --log-level=debug app.wsgi
